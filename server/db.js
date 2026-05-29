@@ -8,7 +8,9 @@ if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-const dbPath = path.join(dataDir, 'database.sqlite');
+const dbPath = process.env.NODE_ENV === 'test' 
+  ? ':memory:' 
+  : path.join(dataDir, 'database.sqlite');
 const db = new Database(dbPath);
 
 // Enable WAL mode for better concurrent read performance

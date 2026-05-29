@@ -136,6 +136,28 @@ Navigate to **http://localhost:5173**
 | PATCH   | `/api/notifications/read-all`     | Mark all notifications as read  |
 | GET     | `/api/sse`                        | SSE stream for real-time events |
 
+## Testing
+
+The project uses **Jest** for backend API testing and **Vitest** for frontend React component testing.
+
+### Running all tests
+From the root directory:
+```bash
+npm test
+```
+
+### Running Backend tests only
+```bash
+cd server
+npm test
+```
+
+### Running Frontend tests only
+```bash
+cd client
+npm test
+```
+
 ---
 
 ## Database Schema

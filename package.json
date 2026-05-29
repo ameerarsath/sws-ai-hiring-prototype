@@ -4,7 +4,10 @@
   "description": "Full Stack Document Management Dashboard",
   "scripts": {
     "server": "cd server && node index.js",
-    "client": "cd client && npm run dev",
+    "start:client": "cd client && npm run dev",
+    "test": "npm run test:server && npm run test:client",
+    "test:server": "cd server && npm test",
+    "test:client": "cd client && npm test",
     "dev": "start /B npm run server && npm run client",
     "install:all": "cd server && npm install && cd ../client && npm install"
   },

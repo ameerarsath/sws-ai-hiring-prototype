@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 
-const NotificationContext = createContext();
+export const NotificationContext = createContext();
 
 export function useNotifications() {
   return useContext(NotificationContext);
