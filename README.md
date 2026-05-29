@@ -122,6 +122,17 @@ Navigate to **http://localhost:5173**
 
 > The Vite dev server automatically proxies `/api` requests to the Express backend on port 3001.
 
+### Production Build (Optional)
+
+To build the optimized frontend for production deployment:
+
+```bash
+cd client
+npm run build
+```
+
+This will generate static assets in the `client/dist` directory.
+
 ---
 
 ## API Endpoints
@@ -184,15 +195,21 @@ npm test
 
 ---
 
-## Design Decisions
+## Assumptions & Notes
 
-- **XHR over Fetch** for uploads — enables `upload.onprogress` for real-time per-file progress tracking
-- **SQLite** — zero-config embedded database, ideal for prototype/assessment; WAL mode enabled for read concurrency
-- **SSE over WebSocket** — simpler unidirectional push, perfect for notifications; auto-reconnect built into browser API
-- **Multer disk storage** — files persisted with UUID filenames to avoid collisions, original names preserved in database
-- **Smart notification threshold (>3 files)** — prevents UI clutter during bulk uploads while maintaining visibility
+### Design Decisions
+- **XHR over Fetch** for uploads — enables `upload.onprogress` for real-time per-file progress tracking.
+- **SQLite** — zero-config embedded database, ideal for prototype/assessment; WAL mode enabled for read concurrency.
+- **SSE over WebSocket** — simpler unidirectional push, perfect for notifications; auto-reconnect built into browser API.
+- **Multer disk storage** — files persisted with UUID filenames to avoid collisions, original names preserved in database.
+- **Smart notification threshold (>3 files)** — prevents UI clutter during bulk uploads while maintaining visibility.
 
----
+### Assumptions
+- **Storage:** Files are stored locally on the server's disk (`server/uploads/`) for simplicity in this prototype. In a real-world production scenario, this would be migrated to cloud object storage (e.g., AWS S3).
+- **Authentication:** The dashboard is built assuming a single-tenant or authenticated environment where the user is already authorized. Authentication/Authorization was considered out of scope for this prototype.
+- **Deployment:** The application is designed to be run locally for assessment purposes. The frontend Vite server proxies `/api` requests directly to the Node.js backend.
+
+
 
 ## License
 
