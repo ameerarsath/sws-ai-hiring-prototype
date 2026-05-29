@@ -1,17 +1,30 @@
 import { useState } from 'react';
 import { useNotifications } from '../context/NotificationContext';
 import NotificationDropdown from './NotificationDropdown';
-import { Bell, FileText } from 'lucide-react';
+import { Bell, FileText, Menu, X } from 'lucide-react';
 
-export default function Header() {
+export default function Header({ sidebarOpen, onToggleSidebar }) {
   const { unreadCount } = useNotifications();
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-200/80 z-40 backdrop-blur-sm bg-white/95">
-      <div className="flex items-center justify-between h-full px-6">
-        {/* Logo */}
+      <div className="flex items-center justify-between h-full px-4 sm:px-6">
+        {/* Left side: hamburger + logo */}
         <div className="flex items-center gap-3">
+          {/* Mobile hamburger */}
+          <button
+            onClick={onToggleSidebar}
+            className="lg:hidden p-2 rounded-xl hover:bg-gray-100 transition-all duration-200 cursor-pointer"
+            aria-label="Toggle sidebar"
+          >
+            {sidebarOpen ? (
+              <X size={20} className="text-gray-600" />
+            ) : (
+              <Menu size={20} className="text-gray-600" />
+            )}
+          </button>
+
           <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25">
             <FileText size={18} className="text-white" />
           </div>

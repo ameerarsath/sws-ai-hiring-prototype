@@ -10,6 +10,7 @@ import FileList from './components/FileList';
 function AppContent() {
   const [activeView, setActiveView] = useState('dashboard');
   const [fileListKey, setFileListKey] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleUploadComplete = useCallback(() => {
     // Force re-render of FileList and Dashboard when files are uploaded
@@ -31,12 +32,20 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-50/50">
-      <Header />
-      <Sidebar activeView={activeView} onNavigate={setActiveView} />
+      <Header
+        sidebarOpen={sidebarOpen}
+        onToggleSidebar={() => setSidebarOpen((o) => !o)}
+      />
+      <Sidebar
+        activeView={activeView}
+        onNavigate={setActiveView}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
-      {/* Main content area */}
-      <main className="ml-64 pt-16">
-        <div className="p-8 max-w-6xl">
+      {/* Main content area — shifts right on desktop, full width on mobile */}
+      <main className="lg:ml-64 pt-16 transition-all duration-300">
+        <div className="p-4 sm:p-6 lg:p-8 max-w-6xl">
           {renderView()}
         </div>
       </main>
