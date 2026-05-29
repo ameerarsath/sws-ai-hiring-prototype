@@ -1,0 +1,12 @@
+{
+  "name": "docvault",
+  "version": "1.0.0",
+  "description": "Full Stack Document Management Dashboard",
+  "scripts": {
+    "server": "cd server && node index.js",
+    "client": "cd client && npm run dev",
+    "dev": "start /B npm run server && npm run client",
+    "install:all": "cd server && npm install && cd ../client && npm install"
+  },
+  "private": true
+}
